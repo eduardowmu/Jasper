@@ -1,12 +1,18 @@
 package com.mballem.jasper.jdbc.service;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.sql.Connection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class JasperService 
 {	/*Variavel de tipo Map para incluir vari�veis que ser�o
@@ -17,14 +23,25 @@ public class JasperService
 	public void addParams(String key, Object obj)
 	{this.params.put(key, obj);}
 	
-	/*Método de compilaç*/
-	private JasperReport compilarJrxml(String arquivo)
-	{	/*Instru��o que vai nos retornar um InputStream*/
+	public void abrirJasperViewer(String jrxml, Connection connection)
+	{	JasperReport report = this.compilarJrxml(jrxml);
 		try 
-		{	InputStream inputStream = getClass().getClassLoader().getResourceAsStream(arquivo);
-			return JasperCompileManager.compileReport(inputStream);
+		{	JasperPrint print = JasperFillManager
+				.fillReport(report, this.params, connection);
+			JasperViewer viewer = new JasperViewer(print);
+			viewer.setVisible(true);
 		} 
 		catch (JRException e) {System.out.println(e.getMessage());}
+	}
+	
+	/*Método de compilaç*/
+	private JasperReport compilarJrxml(String arquivo)
+	{	/*Instrução que vai nos retornar um InputStream*/
+		try 
+		{	InputStream inputStream = new FileInputStream(arquivo);//getClass().getClassLoader().getResourceAsStream(arquivo);
+			return JasperCompileManager.compileReport(inputStream);
+		} 
+		catch (JRException | FileNotFoundException e) {System.out.println(e.getMessage());}
 		return null;
 	}
 }
