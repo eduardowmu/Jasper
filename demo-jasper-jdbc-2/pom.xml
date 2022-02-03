@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>demo-jasper-jdbc-2</groupId>
+  <artifactId>demo-jasper-jdbc-2</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	<maven.compiler.source>1.8</maven.compiler.source>
+  	<maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+  
+  <name>demo-jasper-jdbc-2</name>
+  <url>http://maven.apache.org</url>
+
+  <dependencies>
+  	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java 
+  	Usar sempre a versão usado com a conexão de banco de dados
+  	no jasper-->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>8.0.22</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports 
+	Sempre escolha a versão do seu Editor do Jasper-->
+	<dependency>
+	    <groupId>net.sf.jasperreports</groupId>
+	    <artifactId>jasperreports</artifactId>
+	    <version>6.15.0</version>
+	</dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
