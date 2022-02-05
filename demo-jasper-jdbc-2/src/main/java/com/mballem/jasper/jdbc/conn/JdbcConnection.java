@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JdbcConnection 
-{	private static final String URL = "jdbc:mysql://localhost:3306/jaspercurso?serverTimezone=America/Sao_Paulo";
+{	private static final String URL = "jdbc:mysql://localhost:3306/jaspercurso?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
     private static final String PASS = "";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";

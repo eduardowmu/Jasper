@@ -32,7 +32,13 @@
 	    <artifactId>jasperreports</artifactId>
 	    <version>6.15.0</version>
 	</dependency>
-    <dependency>
+	<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-functions -->
+	<dependency>
+	    <groupId>net.sf.jasperreports</groupId>
+	    <artifactId>jasperreports-functions</artifactId>
+	    <version>6.15.0</version>
+	</dependency>
+	<dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>

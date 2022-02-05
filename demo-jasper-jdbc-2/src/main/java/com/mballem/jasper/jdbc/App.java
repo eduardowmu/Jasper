@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import com.mballem.jasper.jdbc.conn.*;
 import com.mballem.jasper.jdbc.service.JasperService;
-
+/*https://stackoverflow.com/questions/20991641/jasper-compiler-error-when-using-sum-method*/
 public class App 
 {	public static void main( String[] args ) throws SQLException
     {abrirJrxml("01");}
