@@ -2,13 +2,16 @@ package com.mballem.jasper.jdbc.service;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -32,6 +35,16 @@ public class JasperService
 			viewer.setVisible(true);
 		} 
 		catch (JRException e) {System.out.println(e.getMessage());}
+	}
+	
+	public void exportToPdf(String jrxml, Connection connection, String docPath)
+	{	JasperReport report = this.compilarJrxml(jrxml);
+		try 
+		{	OutputStream outputStream = new FileOutputStream(docPath);
+			JasperPrint print = JasperFillManager.fillReport(report, this.params, connection);
+			JasperExportManager.exportReportToPdfStream(print, outputStream);
+		} 
+		catch (JRException | FileNotFoundException e) {System.out.println(e.getMessage());}
 	}
 	
 	/*Método de compilaç*/
