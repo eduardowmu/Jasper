@@ -37,6 +37,18 @@ public class JasperService
 		catch (JRException e) {System.out.println(e.getMessage());}
 	}
 	
+	/*o objeto inputStream é o que possui o arquivo dentro dele*/
+	public void abrirJasperFile(String jasperFile, Connection connection)
+	{	try 
+		{	InputStream inputStream = new FileInputStream(jasperFile); 
+			JasperPrint print = JasperFillManager
+				.fillReport(inputStream, this.params, connection);
+			JasperViewer viewer = new JasperViewer(print);
+			viewer.setVisible(true);
+		} 
+		catch (JRException | FileNotFoundException e) {System.out.println(e.getMessage());}
+	}
+	
 	public void exportToPdf(String jrxml, Connection connection, String docPath)
 	{	JasperReport report = this.compilarJrxml(jrxml);
 		try 

@@ -10,11 +10,23 @@ import com.mballem.jasper.jdbc.service.JasperService;
 /*https://stackoverflow.com/questions/20991641/jasper-compiler-error-when-using-sum-method*/
 public class App 
 {	public static void main( String[] args ) throws SQLException
-    {	/*Novo metodo que além de abrir o rlatório, inserimos o caminho
+    {	openJasperFile("09");
+	
+		/*Novo metodo que além de abrir o rlatório, inserimos o caminho
      	para onde queremos exportar o arquivo PDF gerado*/
-		exportToPdfFile("18", "src/main/resources/documents/" + "jasper-" + UUID.randomUUID() + ".pdf");
+		//exportToPdfFile("18", "src/main/resources/documents/" + "jasper-" + UUID.randomUUID() + ".pdf");
+		
 		//abrirJrxml("18");
     }
+
+	private static void openJasperFile(String number) throws SQLException 
+	{	Connection connection = JdbcConnection.connection();
+		JasperService service = new JasperService();
+		service.addParams("NIVEL", 1);
+		service.addParams("SALARY", new BigDecimal(10));
+		service.abrirJasperFile("src/main/resources/documents/Funcionarios-" + number + ".jasper", connection);
+		connection.close();
+	}
 
 	private static void exportToPdfFile(String number, String docPath) throws SQLException 
 	{	Connection connection = JdbcConnection.connection();
