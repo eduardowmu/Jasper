@@ -41,8 +41,7 @@ public class JasperService
 	public void abrirJasperFile(String jasperFile, Connection connection)
 	{	try 
 		{	InputStream inputStream = new FileInputStream(jasperFile); 
-			JasperPrint print = JasperFillManager
-				.fillReport(inputStream, this.params, connection);
+			JasperPrint print = JasperFillManager.fillReport(inputStream, this.params, connection);
 			JasperViewer viewer = new JasperViewer(print);
 			viewer.setVisible(true);
 		} 
@@ -68,5 +67,20 @@ public class JasperService
 		} 
 		catch (JRException | FileNotFoundException e) {System.out.println(e.getMessage());}
 		return null;
+	}
+	
+	public void openJrxmlWithSubReport(String jrxmlMaster, String jrxmlSubReport, Connection connection)
+	{	try
+		{	JasperReport subReport = this.compilarJrxml(jrxmlSubReport);
+			this.params.put("SUB_REPORT_PARAM", jrxmlSubReport);
+			
+			JasperReport report = this.compilarJrxml(jrxmlMaster);
+			
+			
+			JasperPrint print = JasperFillManager.fillReport(report, this.params, connection);
+			JasperViewer viewer = new JasperViewer(print);
+			viewer.setVisible(true);
+		}
+		catch(JRException e) {System.out.println(e.getMessage());}
 	}
 }

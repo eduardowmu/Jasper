@@ -10,7 +10,8 @@ import com.mballem.jasper.jdbc.service.JasperService;
 /*https://stackoverflow.com/questions/20991641/jasper-compiler-error-when-using-sum-method*/
 public class App 
 {	public static void main( String[] args ) throws SQLException
-    {	openJasperFile("09");
+    {	openJasperFileWithSub("10");
+		//openJasperFile("09");
 	
 		/*Novo metodo que além de abrir o rlatório, inserimos o caminho
      	para onde queremos exportar o arquivo PDF gerado*/
@@ -18,6 +19,28 @@ public class App
 		
 		//abrirJrxml("18");
     }
+	
+	/*para subrelatorios em .jrxml*/
+	private static void openJrxmlFileWithSub(String number) throws SQLException 
+	{	Connection connection = JdbcConnection.connection();
+		JasperService service = new JasperService();
+		/*Para abertura do sub relatorio*/
+		service.addParams("SUB_REPORT_DIR", "src/main/resources/documents/");
+		service.openJrxmlWithSubReport("src/main/resources/documents/Funcionarios-" + number + ".jrxml",
+				"src/main/resources/documents/Funcionarios-" + number + "-subfones.jrxml",
+				connection);
+		connection.close();
+	}
+
+	/*para subrelatorios em .jasper*/
+	private static void openJasperFileWithSub(String number) throws SQLException 
+	{	Connection connection = JdbcConnection.connection();
+		JasperService service = new JasperService();
+		/*Para abertura do sub relatorio*/
+		service.addParams("SUB_REPORT_DIR", "src/main/resources/documents/");
+		service.abrirJasperFile("src/main/resources/documents/Funcionarios-" + number + ".jasper", connection);
+		connection.close();
+	}
 
 	private static void openJasperFile(String number) throws SQLException 
 	{	Connection connection = JdbcConnection.connection();
