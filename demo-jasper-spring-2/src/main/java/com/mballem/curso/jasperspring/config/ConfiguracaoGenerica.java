@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+@Configuration
 public class ConfiguracaoGenerica 
 {	/*O objeto dataSource que irá conter a conexão com o banco
  	de dados baseadas nas configurações que temos no arquivo
