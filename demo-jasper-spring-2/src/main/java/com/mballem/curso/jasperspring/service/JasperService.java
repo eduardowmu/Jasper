@@ -26,7 +26,8 @@ public class JasperService
 	
 	private Map<String, Object> params = new HashMap<>();
 	
-	public void addParams(String key, Object obj)	{this.params.put(key, obj);}
+	public void addParams(String key, Object obj)
+	{this.params.put(key, obj);}
 	
 	/*Método que irá abrir o relatório.*/
 	public byte[] exportarPdf(String code)

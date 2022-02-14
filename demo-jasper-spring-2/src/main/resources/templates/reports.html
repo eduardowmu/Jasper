@@ -8,7 +8,8 @@
 </head>
 <body>
     <h1>Bem vindo ao curso!!!</h1>
-    <h2 th:text="${conn}"></h2>
-    <a th:href="@{/reports}">Abrir Página</a>
+    <h2>Relatorio 01</h2>
+    <a th:href="@{/relatorio/pdf/jr1(code='01', action='v')}">Abrir Página</a>
+    <a th:href="@{/relatorio/pdf/jr1(code='01', action='d')}">Download</a>
 </body>
 </html>
