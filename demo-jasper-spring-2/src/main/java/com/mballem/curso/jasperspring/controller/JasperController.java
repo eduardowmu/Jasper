@@ -1,20 +1,28 @@
 package com.mballem.curso.jasperspring.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.http.MediaType;
 
+import com.mballem.curso.jasperspring.repository.FuncionarioRepository;
+import com.mballem.curso.jasperspring.repository.NivelRepository;
 import com.mballem.curso.jasperspring.service.JasperService;
 
 @Controller
 public class JasperController 
 {	@Autowired JasperService service;
+	@Autowired NivelRepository nivelRepository;
+	@Autowired FuncionarioRepository funcionarioRepository;
 	
 	@GetMapping("/relatorio/pdf/jr1")
 	public void showDocument01(@RequestParam("code") String code,
@@ -39,6 +47,33 @@ public class JasperController
 		/*Método de saida */
 		response.getOutputStream().write(bytes);
 	}
+	
+	@GetMapping("/relatorio/pdf/jr9/{code}")
+	public void showDocument09(@PathVariable("code") String code,
+					@RequestParam(name="nivel", required=false) String nivel,
+					@RequestParam(name="salario", required=false) String salario,
+					HttpServletResponse response) throws IOException
+	{	this.service.addParams("NIVEL", nivel.isEmpty() ? 0L : Long.parseLong(nivel));
+	
+		this.service.addParams("SALARY", salario.isEmpty() ? new BigDecimal(0) : 
+			new BigDecimal(salario));
+		
+		byte[] bytes = this.service.exportarPdf(code);
+		
+		response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+		
+		response.setHeader("Content-disposition", "inline; filename=relatorio-" 
+					+ code + ".pdf");
+		
+		/*Método de saida */
+		response.getOutputStream().write(bytes);
+	}
+	
+	@ModelAttribute("niveis")
+	public List<Long> getNiveis()	{return this.nivelRepository.getNiveis();}
+	
+	@ModelAttribute("salarios")
+	public List<BigDecimal> getSalaries()	{return this.funcionarioRepository.getSalaries();}	
 	
 	@GetMapping("/reports")
 	public String openPageReports()	{return "reports";}

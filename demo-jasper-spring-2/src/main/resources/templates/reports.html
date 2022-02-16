@@ -9,7 +9,29 @@
 <body>
     <h1>Bem vindo ao curso!!!</h1>
     <h2>Relatorio 01</h2>
-    <a th:href="@{/relatorio/pdf/jr1(code='01', action='v')}">Abrir Página</a>
+    <a th:href="@{/relatorio/pdf/jr1(code='01', action='v')}">Abrir</a>
     <a th:href="@{/relatorio/pdf/jr1(code='01', action='d')}">Download</a>
+    
+    <hr>
+    
+    <div>
+    	<h2>Relatorio 09</h2>
+    	<form th:action="@{/relatorio/pdf/jr9/09}" method="get">
+    		<select id="nivel" name="nivel">
+    			<option th:each="nivel : ${niveis}" 
+    					th:value="${nivel}" 
+    					th:text="${nivel}">Selecione o nivel
+    			</option>
+    		</select>
+    		<select id="salario" name="salario">
+    			<option th:each="salario : ${salarios}" 
+    					th:value="${salario}" 
+    					th:text="${salario}>Selecione o salario
+    			</option>
+    		</select>
+    		<button type="submit">Buscar</button>
+    	</form>
+    </div>
+    
 </body>
 </html>

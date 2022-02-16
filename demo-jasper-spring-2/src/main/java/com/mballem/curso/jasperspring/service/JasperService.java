@@ -26,6 +26,10 @@ public class JasperService
 	
 	private Map<String, Object> params = new HashMap<>();
 	
+	/*Construtor sem parametros para sempre setar o diretorio de imagem*/
+	public JasperService()
+	{this.params.put("IMAGEM_DIRETORIO", JASPER_DIRECTORY);}
+	
 	public void addParams(String key, Object obj)
 	{this.params.put(key, obj);}
 	
