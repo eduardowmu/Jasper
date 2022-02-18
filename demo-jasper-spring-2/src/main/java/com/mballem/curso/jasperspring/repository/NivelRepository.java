@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import com.mballem.curso.jasperspring.entity.Nivel;
 
 public interface NivelRepository extends JpaRepository<Nivel, Long> 
-{	@Query("select n.id from nivel n")
+{	@Query("select n.id from Nivel n order by n.id asc")
 	List<Long> getNiveis();
 }

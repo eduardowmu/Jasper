@@ -10,5 +10,8 @@ import com.mballem.curso.jasperspring.entity.Funcionario;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> 
 {	@Query("select distinct f.salario from Funcionario f order by f.salario asc")
-	List<BigDecimal> getSalaries();	
+	List<BigDecimal> getSalaries();
+
+	@Query("select distinct f.id from Funcionario f order by f.nivel asc")
+	List<Long> getNiveis();
 }

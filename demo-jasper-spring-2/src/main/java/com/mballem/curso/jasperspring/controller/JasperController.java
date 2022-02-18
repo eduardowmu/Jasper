@@ -53,7 +53,7 @@ public class JasperController
 					@RequestParam(name="nivel", required=false) String nivel,
 					@RequestParam(name="salario", required=false) String salario,
 					HttpServletResponse response) throws IOException
-	{	this.service.addParams("NIVEL", nivel.isEmpty() ? 0L : Long.parseLong(nivel));
+	{	this.service.addParams("NIVEL", nivel.isEmpty() ? 0 : Integer.parseInt(nivel));
 	
 		this.service.addParams("SALARY", salario.isEmpty() ? new BigDecimal(0) : 
 			new BigDecimal(salario));
