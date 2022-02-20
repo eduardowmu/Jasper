@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Tuple;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import org.springframework.http.MediaType;
 import com.mballem.curso.jasperspring.repository.FuncionarioRepository;
 import com.mballem.curso.jasperspring.repository.NivelRepository;
 import com.mballem.curso.jasperspring.service.JasperService;
+
+import net.sf.jasperreports.engine.JRException;
 
 @Controller
 public class JasperController 
@@ -86,6 +89,19 @@ public class JasperController
 		
 		/*Método de saida */
 		response.getOutputStream().write(bytes);
+	}
+	
+	@GetMapping("/relatorio/html/jr19/{code}")
+	public void showDocument19Html(@PathVariable("code") String code,
+					@RequestParam(name="idf", required=false) Long idf,
+					HttpServletResponse response,
+					HttpServletRequest request) throws IOException, JRException
+	{	response.setContentType(MediaType.TEXT_HTML_VALUE);
+		
+		this.service.addParams("ID_FUNCIONARIO", idf);
+		
+		/*Este método será responsável em renderizar o relatório para a página*/
+		this.service.exportarHtml(code, request, response).exportReport();
 	}
 	
 	@GetMapping("/buscar/funcionarios")
